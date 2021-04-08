@@ -1,19 +1,20 @@
-; Print characters from a file descriptor
+; Read characters from a file descriptor
 ;
 ; Inputs:	RDI = file descriptor
 ;			RSI = address of string
 ;			RDX = size of string
-; Outputs:	RAX = return value (-1 if error, else number of bytes printed)
+; Outputs:	RAX = return value (-1 if error, 0 if EOF found, else number of bytes read)
 ; Clobbers:	<none>
 
 	extern	__errno_location
-	global	ft_write
+	global	ft_read
 
-ft_write:
-	mov		rax, 1						;; system call 1 = write
+ft_read:
+	xor		rax, rax					;; system call 0 = read
 	syscall
-	cmp		rax, 0						;; check write return value
+	cmp		rax, 0						;; check return value
 	jl		error						;; jump to error if negative
+	jg		ft_read						;; loop if positive
 	ret									;; else return
 
 error:

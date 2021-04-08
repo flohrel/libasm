@@ -42,4 +42,10 @@ int	main(void)
 	printf("ft_write(1, \"Hello world\", 15) = %ld\n\n", ft_write(1, "Hello world!\n", 13));
 	printf("write(1, NULL, 15) = %ld\n", write(1, NULL, 15));
 	printf("ft_write(1, NULL, 15) = %ld\n", ft_write(1, NULL, 15));
+
+	printf("\n##################################\n");
+	printf("######      ft_read      ########\n");
+	printf("##################################\n");
+	printf("string = \"Hello world!\"\n\n");
+	printf("ft_read(0, s, 1) = %ld\n", ft_read(0, s, 1));
 }
