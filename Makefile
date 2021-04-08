@@ -8,7 +8,8 @@ OBJDIR		=	obj
 
 SRC			=	ft_strlen.s \
 				ft_strcpy.s \
-				ft_strcmp.s
+				ft_strcmp.s \
+				ft_write.s
 OBJ			=	$(SRC:%.s=$(OBJDIR)/%.o)
 
 ASM			=	nasm

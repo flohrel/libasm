@@ -5,7 +5,6 @@
 ; Outputs:	RAX = address of string copy
 ; Clobbers:	CL, flags
 
-section .text
 	global	ft_strcpy
 
 ft_strcpy:
