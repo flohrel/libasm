@@ -14,7 +14,6 @@ ft_read:
 	syscall
 	cmp		rax, 0						;; check return value
 	jl		error						;; jump to error if negative
-	jg		ft_read						;; loop if positive
 	ret									;; else return
 
 error:

@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <errno.h>
 
 int	main(void)
 {
@@ -38,14 +39,16 @@ int	main(void)
 	printf("######      ft_write      ########\n");
 	printf("##################################\n");
 	printf("string = \"Hello world!\"\n\n");
-	printf("write(1, string, 15) = %ld\n", write(1, "Hello world!\n", 13));
-	printf("ft_write(1, \"Hello world\", 15) = %ld\n\n", ft_write(1, "Hello world!\n", 13));
+	printf("write(1, string, 13) = %ld\n", write(1, "Hello world!\n", 13));
+	printf("ft_write(1, \"Hello world\", 13) = %ld\n\n", ft_write(1, "Hello world!\n", 13));
 	printf("write(1, NULL, 15) = %ld\n", write(1, NULL, 15));
 	printf("ft_write(1, NULL, 15) = %ld\n", ft_write(1, NULL, 15));
 
 	printf("\n##################################\n");
 	printf("######      ft_read      ########\n");
 	printf("##################################\n");
-	printf("string = \"Hello world!\"\n\n");
-	printf("ft_read(0, s, 1) = %ld\n", ft_read(0, s, 1));
+	printf("ft_read(0, NULL, 5) = %ld\n", ft_read(0, NULL, 5));
+	printf("%s\n", strerror(errno));
+	printf("read(0, NULL, 5) = %ld\n", read(0, NULL, 5));
+	printf("%s\n", strerror(errno));
 }
