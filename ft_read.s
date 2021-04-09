@@ -4,7 +4,7 @@
 ;			RSI = address of string
 ;			RDX = size of string
 ; Outputs:	RAX = return value (-1 if error, 0 if EOF found, else number of bytes read)
-; Clobbers:	<none>
+; Clobbers:	flags
 
 	extern	__errno_location
 	global	ft_read

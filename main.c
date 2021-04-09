@@ -47,8 +47,14 @@ int	main(void)
 	printf("\n##################################\n");
 	printf("######      ft_read      ########\n");
 	printf("##################################\n");
-	printf("ft_read(0, NULL, 5) = %ld\n", ft_read(0, NULL, 5));
-	printf("%s\n", strerror(errno));
-	printf("read(0, NULL, 5) = %ld\n", read(0, NULL, 5));
-	printf("%s\n", strerror(errno));
+//	printf("ft_read(0, NULL, 5) = %ld\n", ft_read(0, NULL, 5));
+//	printf("%s\n", strerror(errno));
+//	printf("read(0, NULL, 5) = %ld\n", read(0, NULL, 5));
+
+	char *str;
+	printf("\n##################################\n");
+	printf("######      ft_strdup     ########\n");
+	printf("##################################\n");
+	str = ft_strdup("Hello world!");
+	printf("ft_strdup(\"Hello world!\") = %s\n", str);
 }
