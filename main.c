@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
+#include <stdlib.h>
 
 int	main(void)
 {
@@ -57,4 +58,10 @@ int	main(void)
 	printf("##################################\n");
 	str = ft_strdup("Hello world!");
 	printf("ft_strdup(\"Hello world!\") = %s\n", str);
+	free(str);
+
+	printf("\n##################################\n");
+	printf("######    ft_atoi_base    ########\n");
+	printf("##################################\n");
+	printf("%d\n", ft_atoi_base("1327912", "0123456789"));
 }
