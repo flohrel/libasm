@@ -7,7 +7,8 @@
 
 int	main(void)
 {
-	char s[15];
+	printf("%d\n", ft_atoi_base("  \t --+-+101010", "01"));
+/*	char s[15];
 
 	printf("##################################\n");
 	printf("######      ft_strlen     ########\n");
@@ -63,5 +64,5 @@ int	main(void)
 	printf("\n##################################\n");
 	printf("######    ft_atoi_base    ########\n");
 	printf("##################################\n");
-	printf("%d\n", ft_atoi_base("\t \n-+--1327912", "0123456789"));
+	printf("%d\n", ft_atoi_base("\t \n-+--1327912", "0123456789"));*/
 }
