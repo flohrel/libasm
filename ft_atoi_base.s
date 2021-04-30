@@ -9,23 +9,40 @@ ft_atoi_base:
 	push	rdi						; [rsp] = string to convert
 	mov		rdi, rsi
 	call	check_base
+	pop		rdi
 	cmp		rax, 2					; if (base < 2)
 	jl		error					;    exit
-	pop		rdi
-	mov		[rsp], rax
-	dec		rdi
-	jmp		space_loop
+	mov		[rsp], rax				; [rsp] = bsize
+	call	space_loop
+	call	sign_loop
+	mov		[rsp + 8], rax
 	jmp		exit
 
-space_loop:
+sign_loop:
+	dec		rdi
+	mov		rax, 1
+.loop:
 	inc		rdi
-	cmp		[rdi], ' '
-	jz		space_loop
-	cmp		[rdi], 13
+	cmp		BYTE [rdi], '+'
+	je		.loop
+	cmp		BYTE [rdi], '-'
+	jne		.exit
+	imul	rax, -1
+	jmp		.loop
+.exit:
+	ret
+
+space_loop:
+	dec		rdi
+.loop:
+	inc		rdi
+	cmp		BYTE [rdi], ' '
+	je		.loop
+	cmp		BYTE [rdi], 13
 	jg		.exit
-	cmp		[rdi], 9
-	jge		space_loop
-.exit
+	cmp		BYTE [rdi], 9
+	jge		.loop
+.exit:
 	ret
 
 check_base:
@@ -70,5 +87,4 @@ error:
 	mov		rax, 0
 exit:
 	add		rsp, 16					; restore stack ptr
-	pop		rdi
 	ret
