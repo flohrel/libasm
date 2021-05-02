@@ -21,5 +21,6 @@ char				*ft_strdup(char *);
 **		BONUS
 */
 int					ft_atoi_base(char *str, char *base);
+void				ft_list_push_front(t_list **begin_list, void *data);
 
 #endif

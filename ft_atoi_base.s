@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ft_atoi_base.s                                     :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/05/01 17:59:51 by flohrel           #+#    #+#              #
+#    Updated: 2021/05/02 23:51:38 by flohrel          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 ; Convert string to int in a specific base
 ;
 ; Inputs:	RDI = address of string to convert
@@ -13,13 +25,18 @@ ft_atoi_base:
 	call	check_base
 	pop		rdi
 	cmp		rax, 2					; if (base < 2)
-	jl		error					;    exit
+	jl		.error					;    exit
 	mov		r10, rax				; r10 = bsize
 	call	space_loop				; skip spaces
 	call	sign_loop				; determine sign
 	mov		r11, rax				; r11 = sign
 	call	base_convert
-	jmp		exit
+	jmp		.exit
+.error:
+	xor		rax, rax				; return value = 0
+.exit:
+	imul	rax, r11				; sign * ret
+	ret
 
 is_inbase:
 	xor		rax, rax				; index = 0
@@ -42,7 +59,7 @@ base_convert:
 .loop:
 	inc		rdi
 	call	is_inbase
-	cmp		rax, 0
+	test	rax, rax
 	jl		.exit
 	imul	r8, r10					; ret * bsize
 	add		r8, rax
@@ -80,7 +97,7 @@ space_loop:
 
 check_base:
 	xor		r8, r8					; int bsize = 0
-	cmp		rdi, 0					; check NULL pointer
+	test	rdi, rdi				; check NULL pointer
 	jz		.error					; if true -> .error
 	dec		rdi
 .loop:
@@ -100,7 +117,7 @@ check_base:
 .check_dup:
 	inc		rax
 	mov		cl, BYTE [rax]
-	cmp		cl, 0
+	test	cl, cl
 	jz		.loop
 	cmp		BYTE [rdi], cl
 	jz		.error
@@ -111,10 +128,4 @@ check_base:
 	ret
 .error:
 	mov		rax, 0					; return 0
-	ret
-
-error:
-	xor		rax, rax				; return value = 0
-exit:
-	imul	rax, r11				; sign * ret
 	ret

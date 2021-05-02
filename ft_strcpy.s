@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ft_strcpy.s                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/05/01 18:00:37 by flohrel           #+#    #+#              #
+#    Updated: 2021/05/01 18:00:39 by flohrel          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 ; Determines the length of a C-style NUL-terminated string
 ;
 ; Inputs:	RDI = address of string copy
