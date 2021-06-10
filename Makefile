@@ -4,6 +4,7 @@
 
 NAME		=	libasm.a
 
+VPATH		=	src
 OBJDIR		=	obj
 
 SRC			=	ft_strlen.s \
@@ -11,23 +12,28 @@ SRC			=	ft_strlen.s \
 				ft_strcmp.s \
 				ft_write.s \
 				ft_read.s \
-				ft_strdup.s \
-				ft_atoi_base.s
+				ft_strdup.s
+BONUS		=	ft_atoi_base.s \
+				ft_list_push_front_bonus.s \
+				ft_list_size_bonus.s
+				#ft_list_sort_bonus.s
 OBJ			=	$(SRC:%.s=$(OBJDIR)/%.o)
+BOBJ		=	$(BONUS:%.s=$(OBJDIR)/%.o)
 
 ASM			=	nasm
-ASMFLAGS	=	-felf64
+ASMFLAGS	:=	-I./incld
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 RM			=	/bin/rm -rf
 AR			=	ar
 ARFLAGS		=	rcs
+UNAME		:=	$(shell uname -s)
 
 ifeq ($(UNAME),Linux)
-	ASMFLAGS := -felf64
+	ASMFLAGS += -felf64
 endif
 ifeq ($(UNAME),Darwin)
-	ASMFLAGS := -fmacho64
+	ASMFLAGS += -fmacho64
 endif
 
 
@@ -48,11 +54,14 @@ $(NAME):		$(OBJ)
 $(OBJDIR):
 				mkdir $(OBJDIR)
 
+bonus:			$(NAME) $(BOBJ)
+				$(AR) $(ARFLAGS) $(NAME) $(BOBJ)
+
 debug:			CFLAGS += -fsanitize=address -g3
 debug:			re
 
 clean:
-				$(RM) $(OBJ) test
+				$(RM) $(OBJ) $(BOBJ) test
 
 fclean:			clean
 				$(RM) $(NAME) $(OBJDIR)

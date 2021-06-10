@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_list_push_front.s                               :+:      :+:    :+:    #
+#    ft_list_push_front_bonus.s                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/01 17:59:32 by flohrel           #+#    #+#              #
-#    Updated: 2021/05/02 06:32:26 by flohrel          ###   ########.fr        #
+#    Updated: 2021/05/27 13:03:35 by flohrel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,5 +27,5 @@ ft_list_push_front:
 	mov		rcx, [rdi]				;; save old first
 	mov		[rax+8], rcx			;; next = old first
 	mov		[rdi], rax				;; new first = new struct
-.exit
+.exit:
 	ret
