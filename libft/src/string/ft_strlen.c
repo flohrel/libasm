@@ -6,7 +6,7 @@
 /*   By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 01:10:33 by flohrel           #+#    #+#             */
-/*   Updated: 2021/01/16 15:58:25 by flohrel          ###   ########.fr       */
+/*   Updated: 2021/06/08 10:08:39 by flohrel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 size_t	ft_strlen(const char *s)
 {
-	const char *str;
+	const char	*str;
 
 	str = s;
-	while (*str)
-		str++;
+	if (str)
+		while (*str++)
+			;
 	return (str - s);
 }

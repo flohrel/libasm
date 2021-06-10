@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.h                                             :+:      :+:    :+:   */
+/*   dlist.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 14:34:45 by flohrel           #+#    #+#             */
-/*   Updated: 2021/06/10 16:52:25 by flohrel          ###   ########.fr       */
+/*   Updated: 2021/06/04 01:16:38 by flohrel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIST_H
-# define LIST_H
+#ifndef DLIST_H
+# define DLIST_H
 
 # include "type.h"
 # include "memory.h"
 
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **alst, t_list *new);
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **alst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-void	ft_lstclear(t_list **lst, void (*del)(void *));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_list	*ft_lstsort(t_list *lst, int (*cmp)(void *, void *));
+t_dlist			*ft_dlstnew(void *content);
+void			ft_dlstadd_front(t_dlist **alst, t_dlist *new);
+int				ft_dlstsize(t_dlist *lst);
+t_dlist			*ft_dlstlast(t_dlist *lst);
+void			ft_dlstadd_back(t_dlist **alst, t_dlist *new);
+void			ft_dlstdelone(t_dlist *lst, void (*del)(void *));
+void			ft_dlstclear(t_dlist **lst, void (*del)(void *));
+void			ft_dlstiter(t_dlist *lst, void (*f)(void *));
+t_dlist			*ft_dlstmap(t_dlist *lst, void *(*f)(void *), \
+		void (*del)(void *));
 
 #endif
