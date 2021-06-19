@@ -4,7 +4,7 @@
 ft_list_last:
 	push	rbp
 	mov		rbp, rsp
-	test	rdi, rdi		; cmp lst to NULL
+	test	rdi, rdi			; cmp lst to NULL
 	jz		.return
 .loop:
 	mov		rcx, [rdi+8]		; put lst->next in rcx
@@ -31,16 +31,16 @@ ft_list_add_back:
 	jz		.exit
 	pop		rsi
 	mov		[rax], rsi			; save data pointer in struct
-	pop		rcx					; put list** in rcx
-	push	rax					; save pointer to new struct in stack
-	mov		rdi, [rcx]
+	pop		rcx					; put list in rcx
+	mov		rdi, [rcx]			; dereference list in rdi
+	mov		rsi, rax			; move pointer to new struct in rsi
 	call	ft_list_last
 	test	rax, rax
 	jnz		.add_back
-	mov		rdi, rsi
+	mov		[rcx], rsi
 	jmp		.exit
 .add_back:
-	mov		[rax+8], rcx
+	mov		[rax+8], rsi
 .exit:
 	leave
 	ret

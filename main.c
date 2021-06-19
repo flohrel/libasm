@@ -29,15 +29,13 @@ int	int_cmp(void *nb1, void *nb2)
 void	lst_add(t_list **lst, int value)
 {
 	int		*nb;
-	t_list	*last;
 
 	nb = ft_calloc(1, sizeof(*nb));
 	if (!nb)
 		clean_exit(lst);
 	*nb = value;
-	ft_list_push_front(lst, nb);
-	last = ft_list_add_back(lst, nb);
-	printf("last = %d\n", *(int *)last->content);
+//	ft_list_push_front(lst, nb);
+	ft_list_add_back(lst, nb);
 }
 
 int	main(int argc, char **argv)
