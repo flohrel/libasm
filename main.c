@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include "libasm.h"
+#include "utils/utils.h"
 
 void	clean_exit(t_list **lst)
 {
@@ -53,7 +54,8 @@ int	main(int argc, char **argv)
 			lst_add(&lst, nb);
 		}
 		display_list(lst);
-//		ft_list_sort(&lst, int_cmp);
+//		printf("%d\n", *(int *)ft_list_sort(&lst, int_cmp));
+		display_list(lst);
 	}
 	clean_exit(&lst);
 }

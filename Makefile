@@ -4,7 +4,7 @@
 
 NAME		=	libasm.a
 
-VPATH		=	src
+VPATH		=	src utils
 OBJDIR		=	obj
 INCLDIR		=	incld
 
@@ -17,8 +17,8 @@ SRC			=	ft_strlen.s \
 BONUS		=	ft_atoi_base.s \
 				ft_list_push_front_bonus.s \
 				ft_list_size_bonus.s \
-				ft_list_add_back.s
-				#ft_list_sort_bonus.s
+				ft_list_add_back.s \
+				ft_list_sort_bonus.s
 OBJ			=	$(SRC:%.s=$(OBJDIR)/%.o)
 BOBJ		=	$(BONUS:%.s=$(OBJDIR)/%.o)
 

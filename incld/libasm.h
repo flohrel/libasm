@@ -21,6 +21,4 @@ void		ft_list_push_front(t_list **begin_list, void *data);
 int			ft_list_size(t_list *lst);
 void		ft_list_sort(t_list **lst, int (*cmp)(void *, void *));
 
-void		*ft_list_add_back(t_list **lst, void *new);
-
 #endif
