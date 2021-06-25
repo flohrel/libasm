@@ -6,7 +6,7 @@
 #    By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/01 18:00:26 by flohrel           #+#    #+#              #
-#    Updated: 2021/05/01 18:00:28 by flohrel          ###   ########.fr        #
+#    Updated: 2021/06/25 05:50:52 by flohrel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 ; Inputs:	RDI = file descriptor
 ;			RSI = address of string
 ;			RDX = size of string
-; Outputs:	RAX = return value (-1 if error, 0 if EOF found, else number of bytes read)
+; Outputs:	RAX = return value (-1 if error, 0 if EOF, or nb bytes read)
 ; Clobbers:	flags
 
 	extern	__errno_location

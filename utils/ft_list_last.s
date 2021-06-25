@@ -6,7 +6,7 @@
 #    By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/19 15:22:39 by flohrel           #+#    #+#              #
-#    Updated: 2021/06/19 15:22:50 by flohrel          ###   ########.fr        #
+#    Updated: 2021/06/25 05:00:55 by flohrel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,17 +15,20 @@
 ft_list_last:
 	push	rbp
 	mov		rbp, rsp
-	test	rdi, rdi			; cmp lst to NULL
-	jz		.return
-.loop:
-	mov		rcx, [rdi+8]		; put lst->next in rcx
-	test	rcx, rcx			; cmp to NULL
-	jz		.return
-	mov		rdi, rcx			; lst = lst->next
-	jmp		.loop
-.return:
-	mov		rax, rdi			; return current lst
-.exit:
-	leave
+	mov		QWORD [rbp-8], rdi
+	cmp		QWORD [rbp-8], 0
+	je		.L2
+	jmp		.L3
+.L4:
+	mov		rax, QWORD [rbp-8]
+	mov		rax, QWORD [rax+8]
+	mov		QWORD [rbp-8], rax
+.L3:
+	mov		rax, QWORD [rbp-8]
+	mov		rax, QWORD [rax+8]
+	test	rax, rax
+	jne		.L4
+.L2:
+	mov		rax, QWORD [rbp-8]
+	pop		rbp
 	ret
-

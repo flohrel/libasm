@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/25 04:44:07 by flohrel           #+#    #+#             */
+/*   Updated: 2021/06/25 05:36:32 by flohrel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -35,17 +47,47 @@ void	lst_add(t_list **lst, int value)
 	if (!nb)
 		clean_exit(lst);
 	*nb = value;
-//	ft_list_push_front(lst, nb);
-	ft_list_add_back(lst, nb);
+	ft_list_push_front(lst, nb);
+}
+
+void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(),
+		void (*free_fct)(void *))
+{
+	t_list	*prev;
+	t_list	*lst;
+	t_list	*tmp;
+
+	lst = *begin_list;
+	while (lst != NULL)
+	{
+		tmp = lst;
+		lst = lst->next;
+		if (cmp(tmp->content, data_ref) == 0)
+		{
+			if (tmp == *begin_list)
+				*begin_list = lst;
+			else
+				prev->next = lst;
+			free_fct(tmp->content);
+			free(tmp);
+		}
+		else
+			prev = tmp;
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	t_list	*lst;
 	int		nb;
+	int		*ref;
 
 	(void)argv;
 	lst = NULL;
+	ref = ft_calloc(1, sizeof(*ref));
+	if (!ref)
+		clean_exit(&lst);
+	*ref = ft_atoi_base(argv[1], "0123456789");
 	if (argc > 2)
 	{
 		while (*(++argv))
@@ -54,7 +96,9 @@ int	main(int argc, char **argv)
 			lst_add(&lst, nb);
 		}
 		display_list(lst);
-//		printf("%d\n", *(int *)ft_list_sort(&lst, int_cmp));
+		ft_merge_lstsort(&lst, int_cmp);
+		display_list(lst);
+		ft_list_remove_if(&lst, ref, int_cmp, free);
 		display_list(lst);
 	}
 	clean_exit(&lst);
