@@ -1,16 +1,17 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_list_remove_if.s                                :+:      :+:    :+:    #
+#    ft_list_remove_if_bonus.s                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/25 05:45:44 by flohrel           #+#    #+#              #
-#    Updated: 2021/06/25 05:46:04 by flohrel          ###   ########.fr        #
+#    Updated: 2021/07/14 16:22:33 by flohrel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 	global	ft_list_remove_if
+	extern	free
 
 ft_list_remove_if:
 	push	rbp
@@ -23,8 +24,8 @@ ft_list_remove_if:
 	mov		rax, QWORD [rbp-40]
 	mov		rax, QWORD [rax]
 	mov		QWORD [rbp-16], rax
-	jmp		.L2
-.L6:
+	jmp		.cmp
+.loop:
 	mov		rax, QWORD [rbp-16]
 	mov		QWORD [rbp-24], rax
 	mov		rax, QWORD [rbp-16]
@@ -39,20 +40,20 @@ ft_list_remove_if:
 	mov		eax, 0
 	call	rcx
 	test	eax, eax
-	jne		.L3
+	jne		.next
 	mov		rax, QWORD [rbp-40]
 	mov		rax, QWORD [rax]
 	cmp		QWORD [rbp-24], rax
-	jne		.L4
+	jne		.join
 	mov		rax, QWORD [rbp-40]
 	mov		rdx, QWORD [rbp-16]
 	mov		QWORD [rax], rdx
-	jmp		.L5
-.L4:
+	jmp		.free
+.join:
 	mov		rax, QWORD [rbp-8]
 	mov		rdx, QWORD [rbp-16]
 	mov		QWORD [rax+8], rdx
-.L5:
+.free:
 	mov		rax, QWORD [rbp-24]
 	mov		rax, QWORD [rax]
 	mov		rdx, QWORD [rbp-64]
@@ -61,14 +62,12 @@ ft_list_remove_if:
 	mov		rax, QWORD [rbp-24]
 	mov		rdi, rax
 	call	free
-	jmp		.L2
-.L3:
+	jmp		.cmp
+.next:
 	mov		rax, QWORD [rbp-24]
 	mov		QWORD [rbp-8], rax
-.L2:
+.cmp:
 	cmp		QWORD [rbp-16], 0
-	jne		.L6
-	nop
-	nop
+	jne		.loop
 	leave
 	ret

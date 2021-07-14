@@ -6,7 +6,7 @@
 /*   By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 04:44:07 by flohrel           #+#    #+#             */
-/*   Updated: 2021/06/25 05:36:32 by flohrel          ###   ########.fr       */
+/*   Updated: 2021/07/14 16:21:39 by flohrel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	lst_add(t_list **lst, int value)
 	ft_list_push_front(lst, nb);
 }
 
-void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(),
+/*void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(),
 		void (*free_fct)(void *))
 {
 	t_list	*prev;
@@ -74,7 +74,13 @@ void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(),
 		else
 			prev = tmp;
 	}
-}
+}*/
+
+/*char	**str_init(void)
+{
+	char	**strs;
+	char	*str;
+}*/
 
 int	main(int argc, char **argv)
 {
@@ -82,7 +88,9 @@ int	main(int argc, char **argv)
 	int		nb;
 	int		*ref;
 
-	(void)argv;
+
+	(void)argc;
+
 	lst = NULL;
 	ref = ft_calloc(1, sizeof(*ref));
 	if (!ref)
@@ -96,10 +104,11 @@ int	main(int argc, char **argv)
 			lst_add(&lst, nb);
 		}
 		display_list(lst);
-		ft_merge_lstsort(&lst, int_cmp);
+		ft_list_sort(&lst, int_cmp);
 		display_list(lst);
 		ft_list_remove_if(&lst, ref, int_cmp, free);
 		display_list(lst);
 	}
 	clean_exit(&lst);
+	return (0);
 }
