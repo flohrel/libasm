@@ -2,11 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
+
 /*                                                    +:+ +:+         +:+     */
 /*   By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 04:44:07 by flohrel           #+#    #+#             */
-/*   Updated: 2021/07/14 16:21:39 by flohrel          ###   ########.fr       */
+/*   Updated: 2021/07/15 14:06:01 by flohrel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +16,67 @@
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "libasm.h"
-#include "utils/utils.h"
+#include "ansi_colors.h"
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	char	*str;
+
+	str = (char *)s;
+	while (n--)
+		*str++ = c;
+	return (s);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	char	*ptr;
+	size_t	tsize;
+	size_t	maxsqrt;
+
+	if ((SIZE_MAX / 641u / 6700417u) >= 4294967295u)
+		maxsqrt = 65535;
+	else
+		maxsqrt = 4294967295;
+	if (((nmemb > maxsqrt) || (size > maxsqrt))
+		&& ((SIZE_MAX / nmemb) < size))
+		return (NULL);
+	tsize = nmemb * size;
+	ptr = malloc(tsize);
+	if (!ptr)
+		return (ptr);
+	ft_memset(ptr, 0, tsize);
+	return (ptr);
+}
+
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (lst && del)
+	{
+		del(lst->content);
+		free(lst);
+	}
+}
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*lptr;
+	t_list	*next;
+
+	if (*lst && del)
+	{
+		lptr = *lst;
+		while (lptr)
+		{
+			next = lptr->next;
+			ft_lstdelone(lptr, del);
+			lptr = next;
+		}
+		*lst = NULL;
+	}
+}
 
 void	clean_exit(t_list **lst)
 {
@@ -50,52 +110,34 @@ void	lst_add(t_list **lst, int value)
 	ft_list_push_front(lst, nb);
 }
 
-/*void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(),
-		void (*free_fct)(void *))
+void	print_header(char *str)
 {
-	t_list	*prev;
-	t_list	*lst;
-	t_list	*tmp;
+	int	i;
+	int	len;
 
-	lst = *begin_list;
-	while (lst != NULL)
-	{
-		tmp = lst;
-		lst = lst->next;
-		if (cmp(tmp->content, data_ref) == 0)
-		{
-			if (tmp == *begin_list)
-				*begin_list = lst;
-			else
-				prev->next = lst;
-			free_fct(tmp->content);
-			free(tmp);
-		}
-		else
-			prev = tmp;
-	}
-}*/
+	len = strlen(str) + 20;
+	printf(MAG);
+	while (i++ < len)
+		printf("#");
+	printf("\n");
+	printf("#####     "GRN"%s"MAG"     #####\n", str);
+	while (--i)
+		printf("#");
+	printf("\n");
+	printf(RESET);
+}
 
-/*char	**str_init(void)
-{
-	char	**strs;
-	char	*str;
-}*/
-
-int	main(int argc, char **argv)
+void	list_test(void)
 {
 	t_list	*lst;
 	int		nb;
 	int		*ref;
 
-
-	(void)argc;
-
 	lst = NULL;
 	ref = ft_calloc(1, sizeof(*ref));
 	if (!ref)
 		clean_exit(&lst);
-	*ref = ft_atoi_base(argv[1], "0123456789");
+	*ref = ft_atoi_base(, "0123456789");
 	if (argc > 2)
 	{
 		while (*(++argv))
@@ -109,6 +151,12 @@ int	main(int argc, char **argv)
 		ft_list_remove_if(&lst, ref, int_cmp, free);
 		display_list(lst);
 	}
-	clean_exit(&lst);
+}
+
+int	main(void)
+{
+	char	s[15];
+
+
 	return (0);
 }

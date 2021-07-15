@@ -1,4 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ft_list_sort_bonus.s                               :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/07/15 09:12:33 by flohrel           #+#    #+#              #
+#    Updated: 2021/07/15 13:57:55 by flohrel          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+; Sort list with merge algorithm
+;
+; Inputs:	RDI = pointer to address of list begininng
+;			RSI = compare function
+; Outputs:
+; Clobbers:	RCX, RDX, flags
+
 	global	ft_list_sort
+	extern	ft_list_size
 
 ft_lstlast:
 	push	rbp
@@ -8,8 +28,6 @@ ft_lstlast:
 	je		.return
 	jmp		.loop
 .next:
-	mov		rax, QWORD [rbp-8]
-	mov		rax, QWORD [rax+8]
 	mov		QWORD [rbp-8], rax
 .loop:
 	mov		rax, QWORD [rbp-8]
@@ -44,25 +62,6 @@ ft_lstadd_back:
 	mov		rax, QWORD [rbp-8]
 	mov		rdx, QWORD [rbp-32]
 	mov		QWORD [rax+8], rdx
-.return:
-	leave
-	ret
-
-ft_lstsize:
-	push	rbp
-	mov		rbp, rsp
-	sub		rsp, 16
-	mov		QWORD [rbp-8], rdi
-	cmp		QWORD [rbp-8], 0
-	jne		.recur
-	mov		eax, 0
-	jmp		.return
-.recur:
-	mov		rax, QWORD [rbp-8]
-	mov		rax, QWORD [rax+8]
-	mov		rdi, rax
-	call	ft_lstsize
-	add		eax, 1
 .return:
 	leave
 	ret
@@ -143,7 +142,7 @@ ft_list_sort:
 	mov		QWORD [rbp-16], rax
 	mov		rax, QWORD [rbp-16]
 	mov		rdi, rax
-	call	ft_lstsize
+	call	ft_list_size
 	mov		DWORD [rbp-20], eax
 	cmp		DWORD [rbp-20], 1
 	je		.return

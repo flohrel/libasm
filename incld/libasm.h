@@ -4,22 +4,21 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <errno.h>
-#include "libft.h"
 
-/*typedef struct s_list	t_list;
+typedef struct s_list	t_list;
 
 struct s_list
 {
 	void	*content;
 	t_list	*next;
-};*/
+};
 
 ssize_t	ft_write(int, char *, size_t);
 ssize_t	ft_read(int, char *, size_t);
 size_t	ft_strlen(const char *);
 char	*ft_strcpy(const char *, const char *);
 int		ft_strcmp(const char *, const char *);
-char	ft_strdup(char *);
+char	*ft_strdup(char *);
 
 /*
 **		BONUS

@@ -6,7 +6,7 @@
 #    By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/02 06:34:30 by flohrel           #+#    #+#              #
-#    Updated: 2021/06/15 04:01:04 by flohrel          ###   ########.fr        #
+#    Updated: 2021/07/15 13:57:07 by flohrel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,22 @@
 	global	ft_list_size
 
 ft_list_size:
-	xor		rax, rax
-.loop:
-	test	rdi, rdi
-	jz		.exit
-	mov		rdi, [rdi+8]
-	inc		rax
-	jmp		.loop
-.exit:
+	push	rbp
+	mov		rbp, rsp
+	sub		rsp, 16
+	mov		QWORD [rbp-8], rdi
+	cmp		QWORD [rbp-8], 0
+	jne		.recur
+	mov		eax, 0
+	jmp		.return
+.recur:
+	mov		rax, QWORD [rbp-8]
+	mov		rax, QWORD [rax+8]
+	mov		rdi, rax
+	call	ft_list_size
+	add		eax, 1
+.return:
+	leave
 	ret
+
+

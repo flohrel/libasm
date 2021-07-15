@@ -4,7 +4,7 @@
 
 NAME		=	libasm.a
 
-VPATH		=	src utils
+VPATH		=	src
 OBJDIR		=	obj
 INCLDIR		=	incld
 
@@ -19,9 +19,7 @@ BONUS		=	ft_atoi_base_bonus.s \
 				ft_list_size_bonus.s \
 				ft_list_sort_bonus.s \
 				ft_list_remove_if_bonus.s
-UTILS		=	ft_list_last.s \
-				ft_list_add_back.s
-SRCS		=	$(SRC) $(UTILS)
+SRCS		=	$(SRC)
 OBJ			=	$(SRCS:%.s=$(OBJDIR)/%.o)
 BOBJ		=	$(BONUS:%.s=$(OBJDIR)/%.o)
 
@@ -29,7 +27,7 @@ ASM			=	nasm
 ASMFLAGS	:=	-I./$(INCLDIR)
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra -no-pie -I./$(INCLDIR)
-LFLAGS		=	-L. -lasm -lft
+LFLAGS		=	-L. -lasm
 RM			=	/bin/rm -rf
 AR			=	ar
 ARFLAGS		=	rcs

@@ -6,9 +6,19 @@
 #    By: flohrel <flohrel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/25 05:45:44 by flohrel           #+#    #+#              #
-#    Updated: 2021/07/14 16:22:33 by flohrel          ###   ########.fr        #
+#    Updated: 2021/07/15 09:04:54 by flohrel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+; If (cmp(list_ptr->data, data_ref) == 0) ===> free_fct(list_ptr)
+;
+; Inputs:	RDI = pointer to address of list begininng
+;			RSI = data reference
+;			RDX = pointer to compare function
+;			RCX = pointer to free function
+; Outputs:
+; Clobbers:	flags
+
 
 	global	ft_list_remove_if
 	extern	free
@@ -28,7 +38,6 @@ ft_list_remove_if:
 .loop:
 	mov		rax, QWORD [rbp-16]
 	mov		QWORD [rbp-24], rax
-	mov		rax, QWORD [rbp-16]
 	mov		rax, QWORD [rax+8]
 	mov		QWORD [rbp-16], rax
 	mov		rax, QWORD [rbp-24]
